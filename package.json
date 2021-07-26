@@ -1,5 +1,5 @@
 {
-  "name": "fs-app-template",
+  "name": "Coda",
   "version": "2.0.0",
   "description": "Some boilerplate code to get you started - get shakin'!",
   "main": "index.js",
@@ -20,6 +20,7 @@
   "author": "Fullstack Academy of Code",
   "license": "MIT",
   "dependencies": {
+    "@material-ui/core": "^4.12.2",
     "axios": "^0.21.1",
     "bcrypt": "^5.0.0",
     "compression": "^1.7.3",
@@ -28,7 +29,10 @@
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.9.1",
     "pg": "^8.5.1",
-    "sequelize": "^6.3.5"
+    "react-live": "^2.2.3",
+    "react-lottie": "^1.2.3",
+    "sequelize": "^6.3.5",
+    "tone": "^14.7.77"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
