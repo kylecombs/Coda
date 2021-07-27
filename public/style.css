@@ -4,6 +4,32 @@ body {
 
 a {
   text-decoration: none;
+  color:black
+}
+
+.header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+#title {
+  display: flex;
+  align-items: baseline;
+}
+
+.header h1 {
+  margin-right: 40px;
+}
+
+.links-sidebar {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.links-sidebar a {
+  margin-bottom: 20px;
 }
 
 label {
@@ -19,3 +45,39 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+#homepage-animation {
+  position: relative;
+}
+
+#notes-animation {
+  position: absolute;
+  right: 350px;
+  top: -50px;
+  z-index: 1;
+}
+
+#loops-codeblock {
+  width: 390px;
+  height: 300px;
+}
+
+#codeblock-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#notes-label-div {
+  display: flex;
+  align-items: center;
+}
+
+#notes-label-div label{
+  margin-right: 20px;
+}
+
+#notes-label-div p{
+  color: red
+}
+
