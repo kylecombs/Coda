@@ -1,5 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
 body {
   font-family: sans-serif;
+}
+
+h1 {
+  font-family: 'Roboto Mono', monospace;
 }
 
 a {
@@ -8,6 +14,7 @@ a {
 }
 
 .header {
+  font-family: 'Roboto Mono', monospace;
   display: flex;
   align-items: baseline;
   justify-content: space-between;

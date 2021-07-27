@@ -90,9 +90,9 @@ export class Loops extends React.Component {
       }`
     return (
       <div>
-        <h1>LOOPS</h1>
+        <h1>Loops</h1>
         {/* <p>notes: [ {this.state.notes.join("  ")} ]</p> */}
-        <label>note value in ms</label>
+        <label>playback speed in ms</label>
         <input name='transportSpeed' value={transportSpeed} onChange={this.handleChange}></input>
         <div id='notes-label-div'>
         <label>notes</label>
