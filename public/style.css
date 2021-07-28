@@ -88,3 +88,45 @@ form div {
   color: red
 }
 
+#tree-container {
+  margin-top: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tier {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.level1 {
+  width: 200px;
+}
+
+.level2 {
+  width: 300px;
+}
+
+.level3 {
+  width: 400px
+}
+
+.left-branch, .right-branch {
+  width: 150px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.node {
+  display: flex;
+  font-size: 24px;
+  justify-content: center;
+  align-items: center;
+  border: solid black 2px;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+
+}

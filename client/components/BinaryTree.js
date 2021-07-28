@@ -1,143 +1,57 @@
-import React from "react"
-import Tree from './dataStructures/tree'
-import animateNodeInTree from "./dataStructures/animateNodeInTree";
-import Controls from "./dataStructures/BinaryTreeControls"
-import Visualizer from "./dataStructures/visualizer/Visualizer"
+import React from "react";
+import Tree from "./dataStructures/tree";
 
 export class BinaryTree extends React.Component {
-    constructor (props) {
-        super(props)
-        this.state = {
-            traverseList: [],
-            delayedList: [],
-            traversalType: "",
-            data: {
-                name: "34",
-                children: [
-                  {
-                    name: "92"
-                  },
-                  {
-                    name: "23",
-                    children: [
-                      {
-                        name: "04",
-                        children: [
-                          {
-                            name: "09"
-                          },
-                          { name: "16" }
-                        ]
-                      },
-                      {
-                        name: "12"
-                      }
-                    ]
-                  }
-                ]
-              },
-            }
+  constructor(props) {
+    super(props);
+    this.state = {
+      traverseList: [],
+      traversalType: "",
+    };
 
-        this.tree = new Tree("34")
-        this.delayList = this.delayList.bind(this);
-        this.updateTree = this.updateTree.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.animate = this.animate.bind(this);
-        this.resetTreeDiagram = this.resetTreeDiagram.bind(this);
-    }
+    this.tree = new Tree(4);
+    this.handleChange = this.handleChange.bind(this);
+  }
 
-    componentDidMount() {
-        this.tree.insert("23", "left");
-        this.tree.insert("92", "right");
-        this.tree.insertAt("23", "12", "left"); // Api to insert a node at a specific node
-        this.tree.insertAt("23", "04", "right");
-        this.tree.insertAt("04", "16", "left");
-        this.tree.insertAt("04", "09", "right");
-      }
+  componentDidMount() {
+    this.tree.insert(5);
+    this.tree.insert(2);
+    this.tree.insert(3);
+    this.tree.insert(7);
+    this.tree.insert(6);
+    this.tree.insert(1);
+    this.tree.insert(0);
+    this.tree.insert(8);
+  }
 
-      delayList() { // Render the list of traversed node with some delay to appear animated
-        const { traversedList } = this.state; 
-        traversedList.forEach((listItem, index) => {
-          setTimeout(() => {
-            this.setState({ delayedList: [...this.state.delayedList, listItem] });
-            this.updateTree(listItem);
-          }, 1500 * index);
-        });
-      }
+  handleChange(selectedTraversal) {
+    this.setState({ selectedTraversal, traversedList: [] }, () => {});
+  }
 
-      updateTree(node) { // Update the data provided to the tree diagram (changes color of the current node being traversed)
-        const { data } = this.state;
-        if (data.name === String(node)) {
-          data.circleProps = { fill: "red" };
-          this.setState({ data });
-        } else {
-          const updatedTreeData = animateNodeInTree(this.state.data, String(node));
-          this.setState({ data: updatedTreeData });
-        }
-      }
-
-      handleChange(selectedTraversal) {
-        this.setState({ selectedTraversal, delayedList: [], traversedList: [] }, () => {
-          this.resetTreeDiagram();
-        });
-      }
-
-      animate() { // Perform selected traversal and trigger animation
-        const { selectedTraversal } = this.state;
-        if (selectedTraversal.value === "inorder") {
-          this.tree.inorder();
-        } else if (selectedTraversal.value === "preorder") {
-          this.tree.preorder();
-        } else if (selectedTraversal.value === "postorder") {
-          this.tree.postorder();
-        }
-        else 
-          this.tree.levelordertraverse();
-        const traversedList = this.tree.getTraversed();
-        this.setState({ traversedList }, () => {
-          this.delayList();
-        });
-      }
-    
-      resetTreeDiagram() { // Resets the tree diagram with red nodes back to tree with black nodes
-        const data = {
-          name: "34",
-          children: [
-            {
-              name: "92"
-            },
-            {
-              name: "23",
-              children: [
-                {
-                  name: "04",
-                  children: [
-                    {
-                      name: "09"
-                    },
-                    { name: "16" }
-                  ]
-                },
-                {
-                  name: "12"
-                }
-              ]
-            }
-          ]
-        };
-        this.setState({ data }, () => {
-          this.animate();
-        });
-      }
-
-
-    render () {
-        return (
-            <div>
-                <h1>Binary Tree</h1>
-                <Visualizer data={this.state.data} delayedList={this.state.delayedList} />
-                <Controls traversalType={this.state.traversalType} handleChnage={this.handleChange} />
+  render() {
+    console.log(this.tree);
+    return (
+      <div>
+        <h1>Binary Tree</h1>
+        {this.tree.left &&
+        <div id="tree-container">
+          <div className="node root tier">{this.tree.value}</div>
+          <div className="tier level1">
+            <div className="node">{this.tree.left.value}</div><div className="node">{this.tree.right.value}</div>
+          </div>
+          <div className="tier level2">
+           <div className="left-branch"> <div className="node">{this.tree.left.left.value}</div> <div className="node">{this.tree.left.right.value}</div> </div>
+            <div className="node">{this.tree.right.right.value}</div>
+          </div>
+          <div className="tier level3">
+            <div className="node">{this.tree.left.left.left.value}</div>
+            <div className="right-branch">
+            <div className="node">{this.tree.right.right.left.value}</div>
+            <div className="node">{this.tree.right.right.right.value}</div>
             </div>
-        )
-    }
+          </div>
+        </div>}
+      </div>
+    );
+  }
 }
