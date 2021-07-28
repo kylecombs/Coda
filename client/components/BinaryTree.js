@@ -10,28 +10,36 @@ export class BinaryTree extends React.Component {
       traverseList: [],
       traversalType: "",
       scaleName: "major",
-      scale: ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"]
-
+      scale: ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"],
+      octave: 4
     };
 
     this.tree = new Tree(4);
     this.handleChange = this.handleChange.bind(this);
-  }
-
-  componentDidMount() {
+    this.changeScale = this.changeScale.bind(this)
     this.tree.insert(5);
     this.tree.insert(2);
     this.tree.insert(3);
-    this.tree.insert(7);
     this.tree.insert(6);
     this.tree.insert(1);
     this.tree.insert(0);
   }
 
   handleChange(event) {
+    if (event.target.name === 'scaleName') {
+      this.setState({scaleName: event.target.value}, this.changeScale)
+    }
     this.setState({
       [event.target.name]: event.target.value,
     });
+  }
+
+  changeScale() {
+    const scaleName = this.state.scaleName
+    console.log('scaleName', scaleName)
+    const scale = Scale.get('C ' + scaleName).notes
+    const scaleWithOctaves = scale.map((note) => note + this.state.octave)
+    this.setState({scale: scaleWithOctaves})
   }
 
   render() {
@@ -62,9 +70,6 @@ export class BinaryTree extends React.Component {
           </div>
           <div className="tier level3">
             <div className="node">{this.state.scale[this.tree.left.left.left.value]}</div>
-            <div className="right-branch">
-            <div className="node">{this.state.scale[this.tree.right.right.left.value]}</div>
-            </div>
           </div>
         </div>}
       </div>
