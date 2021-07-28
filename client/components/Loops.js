@@ -27,6 +27,7 @@ export class Loops extends React.Component {
     if (event.target.name === 'notes') {
         if (this.state.playing === false) {
             this.setState({
+                errorMessage: "",
                 notes: event.target.value.split(',')
             })
         } else {
@@ -38,7 +39,6 @@ export class Loops extends React.Component {
           [event.target.name]: event.target.value,
         });
     }
-    console.log(this.state.speed)
   }
 
   playNote(note, duration) {
