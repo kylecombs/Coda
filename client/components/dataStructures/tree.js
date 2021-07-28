@@ -61,16 +61,11 @@ class Tree {
   traverse(callbackFunc) {
     if (this.left) {
       this.left.traverse(callbackFunc);
-    } else {
-      callbackFunc(this.value);
-      return
-    }
+    } 
     callbackFunc(this.value)
     if (this.right) {
       this.right.traverse(callbackFunc);
-    } else {
-      return
-    }
+    } 
   }
 }
   export default Tree;
