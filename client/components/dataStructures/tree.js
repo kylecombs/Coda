@@ -57,15 +57,35 @@ class Tree {
     return false;
   }
 
-  // BinarySearchTree.prototype.traverse
-  traverse(callbackFunc) {
+  inOrderTraverse(callbackFunc) {
     if (this.left) {
-      this.left.traverse(callbackFunc);
-    } 
-    callbackFunc(this.value)
+      this.left.inOrderTraverse(callbackFunc);
+    }
+    callbackFunc(this.value);
     if (this.right) {
-      this.right.traverse(callbackFunc);
-    } 
+      this.right.inOrderTraverse(callbackFunc);
+    }
+  }
+
+  preOrderTraverse(callbackFunc) {
+    callbackFunc(this.value);
+    if (this.left) {
+      this.left.preOrderTraverse(callbackFunc);
+    }
+    if (this.right) {
+      this.right.preOrderTraverse(callbackFunc);
+    }
+  }
+
+  postOrderTraverse(callbackFunc) {
+    if (this.left) {
+      this.left.postOrderTraverse(callbackFunc);
+    }
+    if (this.right) {
+      this.right.postOrderTraverse(callbackFunc);
+    }
+    callbackFunc(this.value);
   }
 }
-  export default Tree;
+
+export default Tree;

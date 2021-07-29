@@ -30,23 +30,32 @@ export const Home = (props) => {
   };
 
   return (
-    <div>
-      <h3>Welcome, {username}</h3>
-      <h4>let's get started making some sounds with code</h4>
+    <div className="parent-div">
+      <div className="greeting">
+        <h3>user: {username}</h3>
+      </div>
       <div className="links-sidebar">
-      <Link to="/loops">Loops</Link>
-      <Link to="/binaryTree">Binary Tree</Link>
-      <Link to="/aMatrix">A-Matrix</Link>
+        <h2 id="sidebar-header">snippets</h2>
+        <Link to="/loops">{"< Loops />"}</Link>
+        <Link to="/binaryTree">{"< Binary Tree />"}</Link>
+        <Link to="/aMatrix">{"< A-Matrix />"}</Link>
+      </div>
+      <div id="hero-text">
+        <h1>{"{coda}"}</h1>
+        <div>
+        <p>a web application for the exploration of{"   {"}</p>
+        <p>{"(music && code)"}</p>
+        <p>check out the snippets to the left to get started</p>
+        <p>{"}"}</p>
+        </div>
       </div>
       <div id="homepage-animation">
         <div id="notes-animation">
-          <Lottie
-            options={notesOptions}
-            height={400}
-            width={400}
-          />
+          <Lottie options={notesOptions}  width={800}/>
         </div>
-        <Lottie options={laptopOptions} height={400} width={400} />
+        <div id="laptop-animation">
+          <Lottie options={laptopOptions} width={800}/>
+        </div>
       </div>
     </div>
   );

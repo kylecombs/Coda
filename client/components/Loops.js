@@ -89,7 +89,7 @@ export class Loops extends React.Component {
         }
       }`
     return (
-      <div>
+      <div className="parent-div">
         <h1>Loops</h1>
         {/* <p>notes: [ {this.state.notes.join("  ")} ]</p> */}
         <label>playback speed in ms</label>

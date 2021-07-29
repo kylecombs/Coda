@@ -6,6 +6,7 @@ import {
   Select,
   InputLabel,
   Button,
+  Input
 } from "@material-ui/core";
 import { Scale } from "@tonaljs/tonal";
 import * as Tone from "tone";
@@ -14,6 +15,7 @@ export class BinaryTree extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      transportSpeed: 500,
       soundSource: new Tone.Synth().toDestination(),
       traverseList: [],
       traversalType: "inOrder",
@@ -28,7 +30,7 @@ export class BinaryTree extends React.Component {
     this.changeScale = this.changeScale.bind(this);
     this.traverseTree = this.traverseTree.bind(this);
     this.traverseAnimation = this.traverseAnimation.bind(this);
-    this.playNote = this.playNote.bind(this)
+    this.playNote = this.playNote.bind(this);
     this.tree.insert(5);
     this.tree.insert(2);
     this.tree.insert(3);
@@ -54,23 +56,34 @@ export class BinaryTree extends React.Component {
   }
 
   traverseAnimation() {
-    let num = 0
+    let num = 0;
     const animation = setInterval(() => {
-      this.setState({selectedNode: this.state.traverseList[num]})
-      this.playNote(this.state.scale[this.state.selectedNode],"16n")
-      num = (num + 1)
+      this.setState({ selectedNode: this.state.traverseList[num] });
+      this.playNote(this.state.scale[this.state.selectedNode], "16n");
+      num = num + 1;
       if (num === this.state.traverseList.length + 1) {
-        clearInterval(animation)
-        this.setState({selectedNode: null})
+        clearInterval(animation);
+        this.setState({ selectedNode: null });
       }
-    }, 500);
+    }, this.state.transportSpeed);
   }
 
   traverseTree() {
     const vals = [];
-    this.tree.traverse((value) => {
-      vals.push(value);
-    });
+    const traversalType = this.state.traversalType
+    if (traversalType === 'inOrder') {
+      this.tree.inOrderTraverse((value) => {
+        vals.push(value);
+      });
+    } else if (traversalType === 'preOrder') {
+      this.tree.preOrderTraverse((value) => {
+        vals.push(value);
+      });
+    } else if (traversalType === 'postOrder') {
+      this.tree.postOrderTraverse((value) => {
+        vals.push(value);
+      });
+    }
     this.setState({ traverseList: vals }, this.traverseAnimation);
   }
 
@@ -80,7 +93,7 @@ export class BinaryTree extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="parent-div">
         <h1>Binary Tree</h1>
         <div className="menu">
           <FormControl>
@@ -111,7 +124,13 @@ export class BinaryTree extends React.Component {
               <MenuItem value="postOrder">Post-Order</MenuItem>
             </Select>
           </FormControl>
-          <Button onClick={this.traverseTree}>Traverse</Button>
+          <InputLabel>playback speed in ms</InputLabel>
+          <Input
+            name="transportSpeed"
+            value={this.state.transportSpeed}
+            onChange={this.handleChange}
+          ></Input>
+          <Button onClick={this.traverseTree} variant="outlined">Traverse</Button>
         </div>
         {this.tree.left && (
           <div id="tree-container">
