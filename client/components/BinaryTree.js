@@ -1,5 +1,6 @@
 import React from "react";
 import Tree from "./dataStructures/tree";
+import { TreeVisualisation } from "./treeGraph";
 import {
   FormControl,
   MenuItem,
@@ -95,6 +96,7 @@ export class BinaryTree extends React.Component {
     return (
       <div className="parent-div">
         <h1>Binary Tree</h1>
+        <div id="menu-tree-div">
         <div className="menu">
           <FormControl>
             <InputLabel style={{ width: "100px" }}>Select Scale</InputLabel>
@@ -131,6 +133,8 @@ export class BinaryTree extends React.Component {
             onChange={this.handleChange}
           ></Input>
           <Button onClick={this.traverseTree} variant="outlined">Traverse</Button>
+        </div>
+        < TreeVisualisation scale={this.state.scale}/>
         </div>
         {this.tree.left && (
           <div id="tree-container">

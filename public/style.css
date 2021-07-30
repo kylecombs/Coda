@@ -212,7 +212,16 @@ form div {
   margin-left: 20px;
 }
 
+#menu-tree-div {
+  display: flex;
+}
+
+
 .selected-node {
   color: red;
   border-color: red;
+}
+
+#treeWrapper {
+  height: 100vh;
 }

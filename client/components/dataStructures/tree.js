@@ -1,4 +1,4 @@
-class Tree {
+class TreeMaker {
   // BinarySearchTree constructor function
   constructor(val) {
     this.value = val;
@@ -12,13 +12,13 @@ class Tree {
       if (this.left) {
         this.left.insert(val);
       } else {
-        this.left = new Tree(val);
+        this.left = new TreeMaker(val);
       }
     } else if (val > this.value) {
       if (this.right) {
         this.right.insert(val);
       } else {
-        this.right = new Tree(val);
+        this.right = new TreeMaker(val);
       }
     }
     return this; // for chaining, do not edit
@@ -88,4 +88,4 @@ class Tree {
   }
 }
 
-export default Tree;
+export default TreeMaker;
